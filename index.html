@@ -1,61 +1,35 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-    <title>Shubham Kaushik</title>
-    <style>
-        h1,
-        h3 {
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            font-size: x-large;
-            color: aliceblue;
-        }
-        
-        body {
-            background-color: black;
-            background-image: url(/myProfile/bghome.jpg);
-            background-size: cover;
-        }
-        
-        .center {
-            display: block;
-            margin-left: 50%;
-            margin-right: 50%;
-            width: 20%;
-            border-radius: 8px;
-        }
-        
-        .links {
-            font-size: larger;
-            color: black;
-        }
-    </style>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
-
 <body>
+    <div class="sidebar">
+        <h2>Your Name</h2>
+        <ul>
+            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="courses.html">📚 Courses</a></li>
+            <li><a href="contact.html">📞 Contact</a></li>
+        </ul>
+        <button id="themeToggle">🌙</button>
+    </div>
 
-    <h1>Hello, there</h1>
-    <h3>
-        Welcome to my Portfolio
-
-
-    </h3>
-
-    <p class="links">
-        <a href="https://eskaykaushik.github.io/ResponsiveWebProjects/" alt="front end projects">Front end Projects</a>
-    </p>
-
-    <p class="links">
-        <a href="/myProfile/back.html" alt="Back end projects">Back end Projects</a>
-    </p>
-
-
-
-
-
+    <div class="content">
+        <div class="cover-photo"></div>
+        <div class="profile">
+            <img src="images/profile.jpg" alt="Your Name">
+            <h1>Your Name</h1>
+            <p>AI & Data Science | Educator | Researcher</p>
+            <div class="social-links">
+                <a href="https://github.com/yourusername">GitHub</a>
+                <a href="https://linkedin.com/in/yourusername">LinkedIn</a>
+                <a href="https://youtube.com/yourchannel">YouTube</a>
+            </div>
+        </div>
+    </div>
 </body>
-
 </html>
