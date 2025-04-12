@@ -155,12 +155,13 @@ body {
 /* Course Card */
 .course-card {
     width: 300px;
-    background: #fff;
+    background: #1e1e1e;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
     transition: transform 0.3s;
+    color: #f0f0f0; /* Light text for contrast */
 }
 
 .course-card:hover {
@@ -192,7 +193,7 @@ body {
 .course-card a {
     display: inline-block;
     padding: 8px 15px;
-    background: #007BFF;
+    background: #11273f;
     color: white;
     text-decoration: none;
     border-radius: 5px;
