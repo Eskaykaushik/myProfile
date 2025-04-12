@@ -7,15 +7,16 @@ body, h1, p, ul {
 
 /* Light & Dark Mode */
 :root {
-    --bg: #ffffff;
-    --text: #333;
-    --sidebar: #f4f4f4;
+    --bg: #f4f4f4;            /* Soft off-white background */
+    --text: #333333;          /* Dark gray text */
+    --sidebar: #e0e0e0;       /* Light gray sidebar */
 }
 
-.dark-mode {
-    --bg: #222;
-    --text: #fff;
-    --sidebar: #333;
+/* Dark mode (darker, more comfortable) */
+body.dark-mode {
+    --bg: #181818;            /* Very dark gray background */
+    --text: #e0e0e0;          /* Light gray text */
+    --sidebar: #242424;       /* Darker gray sidebar */
 }
 
 body {
