@@ -5,7 +5,7 @@ body, h1, p, ul {
     font-family: 'Arial', sans-serif;
 }
 
-/* Light & Dark Mode */
+
 :root {
    
     --bg: #181818;            /* Very dark gray background */
@@ -13,7 +13,7 @@ body, h1, p, ul {
     --sidebar: #242424;       /* Darker gray sidebar */
 }
 
-/* Dark mode (darker, more comfortable) */
+
 body.dark-mode {
     --bg: #d1c2c2;            /* Soft off-white background */
     --text: #333333;          /* Dark gray text */
