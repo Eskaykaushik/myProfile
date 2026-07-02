@@ -1,82 +1,26 @@
-// =======================================
-// TERMINAL INTRO
-// =======================================
-
 const command = "whoami";
 const commandElement = document.getElementById("command");
-const hero = document.querySelector(".hero-content");
-
+const nameLine = document.getElementById("nameLine");
 let index = 0;
 
 function typeCommand() {
-
     if (index < command.length) {
-
+        // Append next character
         commandElement.textContent += command.charAt(index);
-
         index++;
-
+        // Adjust typing speed here (120ms looks natural)
         setTimeout(typeCommand, 120);
-
     } else {
+        // Stop cursor from blinking on the input line once done
+        const cursor = document.querySelector(".terminal .cursor");
+        if (cursor) cursor.style.display = "none";
 
+        // Reveal the terminal output name line
         setTimeout(() => {
-
-            hero.style.opacity = "1";
-            hero.style.transform = "translateY(0)";
-            hero.style.transition = "700ms ease";
-
-        }, 250);
-
+            nameLine.classList.add("visible");
+        }, 300);
     }
-
 }
 
+// Start the terminal simulation on page load
 window.addEventListener("load", typeCommand);
-
-
-// =======================================
-// CURSOR GLOW
-// =======================================
-
-const glow = document.querySelector(".cursor-glow");
-
-window.addEventListener("mousemove", (e) => {
-
-    glow.style.left = `${e.clientX}px`;
-    glow.style.top = `${e.clientY}px`;
-
-});
-
-
-// =======================================
-// SCROLL REVEAL
-// =======================================
-
-const observer = new IntersectionObserver(
-
-(entries) => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add("visible");
-
-        }
-
-    });
-
-},
-
-{
-    threshold: .15
-}
-
-);
-
-document.querySelectorAll("section").forEach(section => {
-
-    observer.observe(section);
-
-});

@@ -1,521 +1,293 @@
-/* ==========================================
-   RESET
-========================================== */
-
-*,
-*::before,
-*::after {
+/* ========================================== RESET ========================================== */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ==========================================
-   VARIABLES
-========================================== */
-
+/* ========================================== VARIABLES ========================================== */
 :root {
-
-    --bg: #090909;
-    --surface: #111111;
-    --text: #f5f5f5;
-    --muted: #8d8d8d;
-    --border: rgba(255,255,255,.08);
-
-    --max-width: 1150px;
-
-    --transition: .3s ease;
-
+    --bg: #09090b;
+    --card-bg: #141417;
+    --text: #f4f4f5;
+    --accent: #10b981; /* Terminal emerald green */
+    --muted: #71717a;
+    --border: #27272a;
 }
 
-/* ==========================================
-   BASE
-========================================== */
-
-html{
-    scroll-behavior:smooth;
+/* ========================================== BASE ========================================== */
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
 }
 
-body{
-
-    background:var(--bg);
-    color:var(--text);
-
-    font-family:"Inter",sans-serif;
-
-    overflow-x:hidden;
-
-    position:relative;
-
-    line-height:1.7;
-
-    -webkit-font-smoothing:antialiased;
-
+/* Background Grid Structure */
+.grid {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(to right, rgba(39, 39, 42, 0.2) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(39, 39, 42, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
 
-/* ==========================================
-   BACKGROUND GRID
-========================================== */
-
-.grid{
-
-    position:fixed;
-    inset:0;
-
-    background-image:
-
-    linear-gradient(
-        rgba(255,255,255,.025) 1px,
-        transparent 1px
-    ),
-
-    linear-gradient(
-        90deg,
-        rgba(255,255,255,.025) 1px,
-        transparent 1px
-    );
-
-    background-size:40px 40px;
-
-    z-index:-2;
-
+/* ========================================== NAVIGATION ========================================== */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 50;
 }
 
-/* ==========================================
-   CURSOR GLOW
-========================================== */
-
-.cursor-glow{
-
-    position:fixed;
-
-    width:500px;
-    height:500px;
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    background:
-    radial-gradient(circle,
-        rgba(255,255,255,.06),
-        transparent 70%);
-
-    transform:translate(-50%,-50%);
-
-    z-index:-1;
-
-    transition:
-    transform .08s linear;
-
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.2rem 2rem;
 }
 
-/* ==========================================
-   LAYOUT
-========================================== */
-
-header,
-main{
-
-    width:min(92%,var(--max-width));
-
-    margin:auto;
-
+.logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
 }
 
-/* ==========================================
-   NAVIGATION
-========================================== */
-
-header{
-
-    padding:2rem 0;
-
+nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
 }
 
-nav{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
+nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
 }
 
-.logo{
-
-    color:var(--text);
-
-    text-decoration:none;
-
-    font-weight:700;
-
-    letter-spacing:-.03em;
-
-    font-size:1.9rem;
-
+nav a:hover {
+    color: var(--accent);
 }
 
-nav ul{
-
-    display:flex;
-
-    gap:2rem;
-
-    list-style:none;
-
+/* ========================================== HERO ========================================== */
+#hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10rem 2rem 4rem 2rem;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-nav a{
-
-    color:var(--muted);
-
-    text-decoration:none;
-
-    transition:var(--transition);
-
-    position:relative;
-
+.terminal {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
 }
 
-nav a::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    bottom:-5px;
-
-    width:0;
-
-    height:1px;
-
-    background:white;
-
-    transition:.3s;
-
+.prompt {
+    margin-right: 0.5rem;
+    user-select: none;
 }
 
-nav a:hover{
-
-    color:white;
-
+@keyframes blink {
+    50% { opacity: 0; }
 }
 
-nav a:hover::after{
-
-    width:100%;
-
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 18px;
+    background-color: var(--accent);
+    vertical-align: middle;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
 }
 
-/* ==========================================
-   HERO
-========================================== */
-
-#hero{
-
-    min-height:85vh;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
+.terminal-output {
+    margin-top: 0.5rem;
 }
 
-.terminal{
-
-    font-family:"JetBrains Mono",monospace;
-
-    color:var(--muted);
-
-    margin-bottom:2rem;
-
-    font-size:.95rem;
-
+/* Terminal output line animation triggers via JavaScript class */
+.name-line {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--muted);
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.prompt{
-
-    color:white;
-
+.name-line.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.cursor{
-
-    display:inline-block;
-
-    width:10px;
-    height:1.2em;
-
-    background:white;
-
-    margin-left:3px;
-
-    animation:blink 1s infinite;
-
+.hero-content h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 1.5rem 0;
 }
 
-.hero-content{
-
-    opacity:0;
-
-    transform:translateY(30px);
-
+.description {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    color: var(--muted);
+    max-width: 650px;
+    margin-bottom: 2.5rem;
 }
 
-.name{
-
-    color:var(--muted);
-
-    font-size:1rem;
-
-    margin-bottom:1rem;
-
+.socials {
+    display: flex;
+    gap: 1.5rem;
 }
 
-h1{
-
-    font-size:clamp(4rem,10vw,6.5rem);
-
-    line-height:.95;
-
-    letter-spacing:-.06em;
-
-    max-width:900px;
-
+.socials a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
-.description{
-
-    margin-top:2rem;
-
-    max-width:700px;
-
-    color:var(--muted);
-
-    font-size:1.25rem;
-
+.socials a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: rgba(16, 185, 129, 0.03);
 }
 
-.socials{
-
-    display:flex;
-
-    gap:2rem;
-
-    margin-top:3rem;
-
+.scroll {
+    margin-top: auto;
+    padding-top: 4rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
-.socials a{
-
-    color:white;
-
-    text-decoration:none;
-
-    position:relative;
-
+/* ========================================== SECTIONS & PROJECTS ========================================== */
+main {
+    padding-bottom: 10rem;
 }
 
-.socials a::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    bottom:-4px;
-
-    width:0;
-
-    height:1px;
-
-    background:white;
-
-    transition:.3s;
-
+#projects {
+    max-width: 1100px;
+    margin: 6rem auto 0 auto;
+    padding: 0 2rem;
 }
 
-.socials a:hover::after{
-
-    width:100%;
-
+.section-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 3rem;
+    font-family: "JetBrains Mono", monospace;
 }
 
-.scroll{
-
-    margin-top:6rem;
-
-    color:var(--muted);
-
-    font-size:.9rem;
-
-    letter-spacing:.15em;
-
-    text-transform:uppercase;
-
+.project {
+    display: flex;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+    transition: border-color 0.3s ease;
 }
 
-/* ==========================================
-   SECTIONS
-========================================== */
-
-section{
-
-    padding:8rem 0;
-
+.project:last-of-type {
+    border-bottom: 1px solid var(--border);
 }
 
-/* ==========================================
-   ANIMATIONS
-========================================== */
+.number {
+    font-family: "JetBrains Mono", monospace;
+    color: var(--muted);
+    font-size: 1rem;
+    padding-top: 0.4rem;
+}
 
-@keyframes blink{
+.project-content {
+    flex: 1;
+}
 
-    50%{
+.project h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s ease;
+}
 
-        opacity:0;
+.project p {
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 1.25rem;
+}
 
+.stack {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.project-link {
+    align-self: flex-start;
+    padding-top: 0.4rem;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover Interactive Animations */
+.project:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.project:hover h2 {
+    color: var(--accent);
+}
+
+.project:hover .project-link {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+/* ========================================== MOBILE RESPONSIVENESS ========================================== */
+@media (max-width: 768px) {
+    nav ul {
+        display: none; /* Simplifies layout for smaller viewports */
     }
 
-}
-
-/* ==========================================
-   MOBILE
-========================================== */
-
-@media(max-width:768px){
-
-    nav{
-
-        flex-direction:column;
-
-        gap:1.5rem;
-
+    #hero {
+        padding-top: 8rem;
     }
 
-    nav ul{
-
-        gap:1rem;
-
+    .project {
+        flex-direction: column;
+        gap: 1rem;
     }
 
-    h1{
-
-        font-size:3.5rem;
-
+    .project-link {
+        padding-top: 0;
     }
-
-    .description{
-
-        font-size:1rem;
-
-    }
-
-    .socials{
-
-        flex-wrap:wrap;
-
-        gap:1rem;
-
-    }
-
-}
-
-#projects{
-
-    margin-top:6rem;
-
-}
-
-.section-label{
-
-    color:var(--muted);
-
-    text-transform:uppercase;
-
-    letter-spacing:.2em;
-
-    margin-bottom:3rem;
-
-}
-
-.project{
-
-    display:grid;
-
-    grid-template-columns:80px 1fr auto;
-
-    gap:2rem;
-
-    padding:3rem 0;
-
-    border-top:1px solid var(--border);
-
-    align-items:start;
-
-}
-
-.number{
-
-    color:var(--muted);
-
-    font-family:"JetBrains Mono", monospace;
-
-}
-
-.project h2{
-
-    font-size:2rem;
-
-    margin-bottom:1rem;
-
-    transition:.3s;
-
-}
-
-.project p{
-
-    max-width:650px;
-
-    color:var(--muted);
-
-}
-
-.stack{
-
-    display:block;
-
-    margin-top:1.5rem;
-
-    color:#777;
-
-    font-size:.95rem;
-
-}
-
-.project-link{
-
-    color:white;
-
-    text-decoration:none;
-
-    transition:.3s;
-
-}
-
-.project:hover h2{
-
-    transform:translateX(10px);
-
-}
-
-.project:hover .project-link{
-
-    transform:translateX(8px);
-
 }
