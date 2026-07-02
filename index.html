@@ -1,36 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shubham Kaushik - Profile</title>
+
+    <title>Shubham Kaushik</title>
+
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <div class="sidebar">
-        <h2>Shubham Kaushik</h2>
-        <ul>
-            <li><a href="index.html">🏠 Home</a></li>
-            <li><a href="courses.html">📖 Courses</a></li>
-            <li><a href="projects.html">💡 Projects</a></li>
-            <li><a href="contact.html">📩 Contact</a></li>
-        </ul>
-        <button id="themeToggle">🌙 Toggle Theme</button>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow"></div>
+
+    <!-- Background Grid -->
+    <div class="grid"></div>
+
+    <header>
+
+        <nav>
+
+            <a href="/" class="logo">
+                SK
+            </a>
+
+            <ul>
+
+                <li>
+                    <a href="#projects">Projects</a>
+                </li>
+
+                <li>
+                    <a href="#about">About</a>
+                </li>
+
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section id="hero">
+
+            <div class="terminal">
+
+                <span class="prompt">$</span>
+
+                <span id="command"></span>
+
+                <span class="cursor"></span>
+
+            </div>
+
+
+            <div class="hero-content">
+
+                <p class="name">
+                    Shubham Kaushik
+                </p>
+
+                <h1>
+                    Building intelligent systems.
+                </h1>
+
+                <p class="description">
+
+                    I build reliable AI systems—from retrieval
+                    pipelines and agentic workflows to developer
+                    tools focused on solving real-world problems.
+
+                </p>
+
+
+                <div class="socials">
+
+                    <a href="https://github.com/Eskaykaushik" target="_blank">
+                        GitHub
+                    </a>
+
+                    <a href="https://linkedin.com/in/eskaykaushik" target="_blank">
+                        LinkedIn
+                    </a>
+
+                    <a href="https://youtube.com/@shubhamkaushik5690" target="_blank">
+                        YouTube
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="scroll">
+
+                ↓ Selected Work
+
+            </div>
+
+        </section>
+
+
+        <section id="projects">
+
+    <p class="section-label">Selected Work</p>
+
+    <div class="project">
+
+        <span class="number">01</span>
+
+        <div class="project-content">
+
+            <h2>ConTrack</h2>
+
+            <p>
+                Contract intelligence platform that audits agreements
+                using LangGraph, retrieval-augmented generation and
+                internal policy knowledge.
+            </p>
+
+            <span class="stack">
+                LangGraph · FastAPI · Pinecone
+            </span>
+
+        </div>
+
+        <a href="#" class="project-link">
+            View Project
+        </a>
+
     </div>
 
-    <div class="content">
-        <div class="cover-photo"></div>
-        <div class="profile">
-            <img src="images/profilepic.jpg" alt="Shubham Kaushik">
-            <h1>Shubham Kaushik</h1>
-            <p>🚀 AI & Data Science | 🎓 Educator | 🔬 Researcher</p>
-            <div class="social-links">
-                <a href="https://github.com/Eskaykaushik" target="_blank">🐙 GitHub</a>
-                <a href="https://www.linkedin.com/in/eskaykaushik" target="_blank">💼 LinkedIn</a>
-                <a href="https://www.youtube.com/@shubhamkaushik5690" target="_blank">🎥 YouTube</a>
-            </div>
+    <div class="project">
+
+        <span class="number">02</span>
+
+        <div class="project-content">
+
+            <h2>MissMatch</h2>
+
+            <p>
+                Multi-agent system that compares business contracts
+                against internal policies and identifies compliance
+                risks.
+            </p>
+
+            <span class="stack">
+                AutoGen · Python · Groq
+            </span>
+
         </div>
+
+        <a href="#" class="project-link">
+            View Project
+        </a>
+
     </div>
+
+</section>
+
+        <section id="about">
+
+        </section>
+
+        <section id="contact">
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
