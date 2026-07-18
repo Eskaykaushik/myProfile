@@ -1,26 +1,89 @@
+// ==========================================
+// HERO TERMINAL ANIMATION
+// ==========================================
+
 const command = "whoami";
 const commandElement = document.getElementById("command");
 const nameLine = document.getElementById("nameLine");
-let index = 0;
 
-function typeCommand() {
-    if (index < command.length) {
-        // Append next character
-        commandElement.textContent += command.charAt(index);
-        index++;
-        // Adjust typing speed here (120ms looks natural)
-        setTimeout(typeCommand, 120);
-    } else {
-        // Stop cursor from blinking on the input line once done
-        const cursor = document.querySelector(".terminal .cursor");
-        if (cursor) cursor.style.display = "none";
+if (commandElement && nameLine) {
 
-        // Reveal the terminal output name line
-        setTimeout(() => {
-            nameLine.classList.add("visible");
-        }, 300);
+    let index = 0;
+
+    function typeCommand() {
+
+        if (index < command.length) {
+
+            commandElement.textContent += command.charAt(index);
+            index++;
+
+            setTimeout(typeCommand, 120);
+
+        } else {
+
+            const cursor = document.querySelector(".terminal .cursor");
+
+            if (cursor) {
+                cursor.style.display = "none";
+            }
+
+            setTimeout(() => {
+                nameLine.classList.add("visible");
+            }, 300);
+
+        }
+
     }
+
+    window.addEventListener("load", typeCommand);
+
 }
 
-// Start the terminal simulation on page load
-window.addEventListener("load", typeCommand);
+
+// ==========================================
+// RESUME THEME TOGGLE
+// ==========================================
+
+const resumeTheme = document.getElementById("resumeTheme");
+
+if (resumeTheme) {
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
+
+        document.body.classList.add("light");
+        resumeTheme.textContent = "Dark Mode";
+
+    }
+
+    resumeTheme.addEventListener("click", () => {
+
+        document.body.classList.toggle("light");
+
+        const isLight = document.body.classList.contains("light");
+
+        resumeTheme.textContent = isLight ? "Dark Mode" : "Light Mode";
+
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+
+    });
+
+}
+
+
+// ==========================================
+// DOWNLOAD PDF
+// ==========================================
+
+const downloadBtn = document.getElementById("downloadResume");
+
+if (downloadBtn) {
+
+    downloadBtn.addEventListener("click", () => {
+
+        window.print();
+
+    });
+
+}
