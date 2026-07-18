@@ -291,3 +291,15 @@ main {
         padding-top: 0;
     }
 }
+
+
+#about {
+    max-width: 1100px;
+    margin: 6rem auto 0 auto;
+    padding: 0 2rem;
+}
+
+#about .description {
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+}
