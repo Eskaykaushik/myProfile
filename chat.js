@@ -15,9 +15,9 @@
     const input = document.getElementById("chat-input");
     const sendBtn = document.getElementById("chat-send");
 
-    const AUTHOR_LABEL = "shubham · k-kaushik";
+    const AUTHOR_LABEL = "shubham";
 
-    const WELCOME = "Hey — I'm Shubham, or k-kaushik, my AI persona. Ask me about my work, my projects, Kaushix Labs, or anything you'd like to build together.";
+    const WELCOME = "Hey — I'm Shubham. Ask me about my work, my projects, Kaushix Labs, or anything you'd like to build together.";
 
     const SUGGESTIONS = [
         "What projects have you built?",
