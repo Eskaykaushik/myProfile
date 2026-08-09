@@ -41,31 +41,26 @@ if (commandElement && nameLine) {
 
 
 // ==========================================
-// RESUME THEME TOGGLE
+// THEME TOGGLE
 // ==========================================
 
-const resumeTheme = document.getElementById("resumeTheme");
+const themeToggle = document.getElementById("themeToggle");
 
-if (resumeTheme) {
+if (themeToggle) {
 
-    const savedTheme = localStorage.getItem("theme");
+    const isLight = () => document.documentElement.classList.contains("light");
 
-    if (savedTheme === "light") {
+    themeToggle.setAttribute("aria-pressed", isLight() ? "true" : "false");
 
-        document.body.classList.add("light");
-        resumeTheme.textContent = "Dark Mode";
+    themeToggle.addEventListener("click", () => {
 
-    }
+        const light = !isLight();
 
-    resumeTheme.addEventListener("click", () => {
+        document.documentElement.classList.toggle("light", light);
 
-        document.body.classList.toggle("light");
+        themeToggle.setAttribute("aria-pressed", light ? "true" : "false");
 
-        const isLight = document.body.classList.contains("light");
-
-        resumeTheme.textContent = isLight ? "Dark Mode" : "Light Mode";
-
-        localStorage.setItem("theme", isLight ? "light" : "dark");
+        localStorage.setItem("theme", light ? "light" : "dark");
 
     });
 
