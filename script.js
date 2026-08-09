@@ -87,3 +87,58 @@ if (downloadBtn) {
     });
 
 }
+
+
+// ==========================================
+// CURSOR GLOW
+// ==========================================
+
+const cursorGlow = document.querySelector(".cursor-glow");
+
+if (cursorGlow) {
+
+    let x = window.innerWidth / 2;
+    let y = window.innerHeight / 3;
+
+    cursorGlow.style.transform = `translate(${x - 240}px, ${y - 240}px)`;
+
+    window.addEventListener("mousemove", (event) => {
+
+        cursorGlow.style.transform = `translate(${event.clientX - 240}px, ${event.clientY - 240}px)`;
+
+    }, { passive: true });
+
+}
+
+
+// ==========================================
+// SCROLL REVEAL
+// ==========================================
+
+const revealElements = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window && revealElements.length) {
+
+    const revealObserver = new IntersectionObserver((entries) => {
+
+        entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.classList.add("visible");
+
+                revealObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+
+    revealElements.forEach((el) => revealObserver.observe(el));
+
+} else {
+
+    revealElements.forEach((el) => el.classList.add("visible"));
+
+}
