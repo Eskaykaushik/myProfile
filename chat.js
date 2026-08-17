@@ -27,6 +27,7 @@
     ];
 
     let firstOpen = true;
+    const history = [];
 
     // Pre-warm Render service on page load (fire-and-forget)
     fetch(API_URL.replace(/\/+$/, ""), { method: "GET" })
@@ -189,7 +190,7 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ message: message })
+            body: JSON.stringify({ message: message, history: history })
         });
 
         if (!response.ok) {
@@ -217,6 +218,7 @@
         input.value = "";
 
         addMessage("you", message, "user");
+        history.push({ role: "user", content: message });
 
         sendBtn.disabled = true;
         addTyping();
@@ -225,6 +227,7 @@
             const answer = await ask(message);
             removeTyping();
             typeMessage(AUTHOR_LABEL, answer, "bot");
+            history.push({ role: "assistant", content: answer });
         } catch (error) {
             console.error("Chat error:", error);
             removeTyping();
