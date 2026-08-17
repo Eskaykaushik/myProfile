@@ -479,6 +479,7 @@ main {
     .about-photo-wrap {
         width: 100px;
         height: 100px;
+        margin: 0 auto;
     }
 }
 
@@ -506,6 +507,18 @@ main {
     width: 120px;
     height: 120px;
     flex-shrink: 0;
+    animation: float 4s ease-in-out infinite;
+}
+
+.about-photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    mask-image: radial-gradient(circle, black 40%, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle, black 40%, transparent 72%);
+    pointer-events: none;
 }
 
 .about-photo {
@@ -518,6 +531,17 @@ main {
     mask-image: radial-gradient(circle, black 40%, transparent 72%);
     -webkit-mask-image: radial-gradient(circle, black 40%, transparent 72%);
     box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-photo:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.45);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
 }
 
 .about-text {
