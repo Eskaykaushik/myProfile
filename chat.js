@@ -68,6 +68,41 @@
         return wrap;
     }
 
+    function typeMessage(author, text, type) {
+        const wrap = document.createElement("div");
+        wrap.className = "chat-msg " + (type || "bot");
+
+        if (author) {
+            const label = document.createElement("span");
+            label.className = "chat-msg-label";
+            label.textContent = author;
+            wrap.appendChild(label);
+        }
+
+        const content = document.createElement("div");
+        content.className = "typing-content";
+        wrap.appendChild(content);
+
+        body.appendChild(wrap);
+        scrollToBottom();
+
+        let skipped = false;
+        wrap.addEventListener("click", () => { skipped = true; });
+
+        let i = 0;
+        const interval = setInterval(() => {
+            if (skipped || i >= text.length) {
+                clearInterval(interval);
+                content.innerHTML = marked.parse(text);
+                scrollToBottom();
+                return;
+            }
+            i++;
+            content.innerHTML = marked.parse(text.slice(0, i));
+            scrollToBottom();
+        }, 30);
+    }
+
     function addTyping() {
         const wrap = document.createElement("div");
         wrap.className = "chat-msg bot";
@@ -78,42 +113,18 @@
         label.textContent = AUTHOR_LABEL;
         wrap.appendChild(label);
 
-        const indicator = document.createElement("div");
-        indicator.className = "typing-indicator";
+        const dots = document.createElement("div");
+        dots.className = "thinking-dots";
+        dots.innerHTML = "<span></span><span></span><span></span>";
+        wrap.appendChild(dots);
 
-        const text = document.createElement("span");
-        text.className = "typing-text";
-        text.textContent = "Thinking";
-        indicator.appendChild(text);
-
-        const cursor = document.createElement("span");
-        cursor.className = "typing-cursor";
-        indicator.appendChild(cursor);
-
-        wrap.appendChild(indicator);
         body.appendChild(wrap);
         scrollToBottom();
-
-        const messages = ["Thinking", "Processing", "Almost there"];
-        let msgIndex = 0;
-        const interval = setInterval(() => {
-            msgIndex = (msgIndex + 1) % messages.length;
-            text.style.opacity = "0";
-            setTimeout(() => {
-                text.textContent = messages[msgIndex];
-                text.style.opacity = "1";
-            }, 200);
-        }, 2000);
-
-        wrap._typingInterval = interval;
     }
 
     function removeTyping() {
         const typing = document.getElementById("chat-typing");
-        if (typing) {
-            clearInterval(typing._typingInterval);
-            typing.remove();
-        }
+        if (typing) typing.remove();
     }
 
     function renderChips() {
@@ -209,7 +220,7 @@
         try {
             const answer = await ask(message);
             removeTyping();
-            addMessage(AUTHOR_LABEL, answer, "bot");
+            typeMessage(AUTHOR_LABEL, answer, "bot");
         } catch (error) {
             console.error("Chat error:", error);
             removeTyping();
