@@ -233,6 +233,9 @@ html.light .theme-toggle .icon-moon {
 }
 
 .socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--text);
     text-decoration: none;
     font-size: 0.95rem;
@@ -240,13 +243,20 @@ html.light .theme-toggle .icon-moon {
     border: 1px solid var(--border);
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+}
+
+.socials a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 .socials a:hover {
     border-color: var(--accent);
     color: var(--accent);
-    background-color: rgba(16, 185, 129, 0.03);
+    background-color: rgba(16, 185, 129, 0.08);
+    transform: translateY(-2px);
 }
 
 .scroll {
@@ -284,6 +294,9 @@ main {
     padding: 2.5rem 0;
     border-top: 1px solid var(--border);
     transition: border-color 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 .project:last-of-type {
@@ -321,11 +334,10 @@ main {
     color: var(--muted);
 }
 
-.project-link {
+.project-arrow {
     align-self: flex-start;
     padding-top: 0.4rem;
     color: var(--text);
-    text-decoration: none;
     font-size: 0.95rem;
     font-weight: 500;
     transition: color 0.2s ease, transform 0.2s ease;
@@ -333,14 +345,14 @@ main {
 
 /* Hover Interactive Animations */
 .project:hover {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(16, 185, 129, 0.35);
 }
 
 .project:hover h2 {
     color: var(--accent);
 }
 
-.project:hover .project-link {
+.project:hover .project-arrow {
     color: var(--accent);
     transform: translateX(4px);
 }
@@ -377,10 +389,6 @@ main {
 .project-highlights span:hover {
     color: var(--accent);
     border-color: var(--accent);
-}
-
-.project:hover {
-    border-color: rgba(16, 185, 129, 0.35);
 }
 
 /* Scroll reveal */
@@ -434,7 +442,7 @@ main {
         gap: 1rem;
     }
 
-    .project-link {
+    .project-arrow {
         padding-top: 0;
     }
 }
@@ -485,6 +493,9 @@ main {
 }
 
 #contact .socials a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--text);
     text-decoration: none;
     font-size: 0.95rem;
@@ -492,13 +503,20 @@ main {
     padding: 0.65rem 1.2rem;
     border: 1px solid var(--border);
     border-radius: 4px;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+}
+
+#contact .socials a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
 }
 
 #contact .socials a:hover {
     color: var(--accent);
     border-color: var(--accent);
-    background: rgba(16, 185, 129, 0.03);
+    background: rgba(16, 185, 129, 0.08);
+    transform: translateY(-2px);
 }
 
 
