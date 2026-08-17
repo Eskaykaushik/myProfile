@@ -78,18 +78,42 @@
         label.textContent = AUTHOR_LABEL;
         wrap.appendChild(label);
 
-        const dots = document.createElement("div");
-        dots.className = "typing";
-        dots.innerHTML = "<span></span><span></span><span></span>";
-        wrap.appendChild(dots);
+        const indicator = document.createElement("div");
+        indicator.className = "typing-indicator";
 
+        const text = document.createElement("span");
+        text.className = "typing-text";
+        text.textContent = "Thinking";
+        indicator.appendChild(text);
+
+        const cursor = document.createElement("span");
+        cursor.className = "typing-cursor";
+        indicator.appendChild(cursor);
+
+        wrap.appendChild(indicator);
         body.appendChild(wrap);
         scrollToBottom();
+
+        const messages = ["Thinking", "Processing", "Almost there"];
+        let msgIndex = 0;
+        const interval = setInterval(() => {
+            msgIndex = (msgIndex + 1) % messages.length;
+            text.style.opacity = "0";
+            setTimeout(() => {
+                text.textContent = messages[msgIndex];
+                text.style.opacity = "1";
+            }, 200);
+        }, 2000);
+
+        wrap._typingInterval = interval;
     }
 
     function removeTyping() {
         const typing = document.getElementById("chat-typing");
-        if (typing) typing.remove();
+        if (typing) {
+            clearInterval(typing._typingInterval);
+            typing.remove();
+        }
     }
 
     function renderChips() {
@@ -120,6 +144,10 @@
         launcher.classList.add("active");
         launcher.setAttribute("aria-expanded", "true");
         input.focus();
+
+        // Pre-warm Render service (fire-and-forget)
+        fetch(API_URL.replace(/\/+$/, ""), { method: "GET" })
+            .catch(() => {});
 
         if (firstOpen) {
             firstOpen = false;
