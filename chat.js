@@ -27,6 +27,11 @@
     ];
 
     let firstOpen = true;
+    const history = [];
+
+    // Pre-warm Render service on page load (fire-and-forget)
+    fetch(API_URL.replace(/\/+$/, ""), { method: "GET" })
+        .catch(() => {});
 
 
     /* ==========================================
@@ -43,7 +48,11 @@
     }
 
     function scrollToBottom() {
-        body.scrollTop = body.scrollHeight;
+        const threshold = 80;
+        const nearBottom = body.scrollHeight - body.scrollTop - body.clientHeight < threshold;
+        if (nearBottom) {
+            body.scrollTop = body.scrollHeight;
+        }
     }
 
     function addMessage(author, text, type) {
@@ -68,6 +77,41 @@
         return wrap;
     }
 
+    function typeMessage(author, text, type) {
+        const wrap = document.createElement("div");
+        wrap.className = "chat-msg " + (type || "bot");
+
+        if (author) {
+            const label = document.createElement("span");
+            label.className = "chat-msg-label";
+            label.textContent = author;
+            wrap.appendChild(label);
+        }
+
+        const content = document.createElement("div");
+        content.className = "typing-content";
+        wrap.appendChild(content);
+
+        body.appendChild(wrap);
+        scrollToBottom();
+
+        let skipped = false;
+        wrap.addEventListener("click", () => { skipped = true; });
+
+        let i = 0;
+        const interval = setInterval(() => {
+            if (skipped || i >= text.length) {
+                clearInterval(interval);
+                content.innerHTML = marked.parse(text);
+                scrollToBottom();
+                return;
+            }
+            i++;
+            content.innerHTML = marked.parse(text.slice(0, i));
+            scrollToBottom();
+        }, 30);
+    }
+
     function addTyping() {
         const wrap = document.createElement("div");
         wrap.className = "chat-msg bot";
@@ -79,7 +123,7 @@
         wrap.appendChild(label);
 
         const dots = document.createElement("div");
-        dots.className = "typing";
+        dots.className = "thinking-dots";
         dots.innerHTML = "<span></span><span></span><span></span>";
         wrap.appendChild(dots);
 
@@ -146,7 +190,7 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ message: message })
+            body: JSON.stringify({ message: message, history: history })
         });
 
         if (!response.ok) {
@@ -174,6 +218,7 @@
         input.value = "";
 
         addMessage("you", message, "user");
+        history.push({ role: "user", content: message });
 
         sendBtn.disabled = true;
         addTyping();
@@ -181,7 +226,8 @@
         try {
             const answer = await ask(message);
             removeTyping();
-            addMessage(AUTHOR_LABEL, answer, "bot");
+            typeMessage(AUTHOR_LABEL, answer, "bot");
+            history.push({ role: "assistant", content: answer });
         } catch (error) {
             console.error("Chat error:", error);
             removeTyping();
