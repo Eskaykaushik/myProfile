@@ -137,37 +137,3 @@ if ("IntersectionObserver" in window && revealElements.length) {
     revealElements.forEach((el) => el.classList.add("visible"));
 
 }
-
-
-// ==========================================
-// MOBILE MENU
-// ==========================================
-
-const menuToggle = document.getElementById("menuToggle");
-const navList = document.querySelector("nav ul");
-
-if (menuToggle && navList) {
-
-    menuToggle.addEventListener("click", () => {
-        const open = navList.classList.toggle("nav-open");
-        menuToggle.classList.toggle("active");
-        menuToggle.setAttribute("aria-expanded", String(open));
-    });
-
-    navList.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-            navList.classList.remove("nav-open");
-            menuToggle.classList.remove("active");
-            menuToggle.setAttribute("aria-expanded", "false");
-        });
-    });
-
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && navList.classList.contains("nav-open")) {
-            navList.classList.remove("nav-open");
-            menuToggle.classList.remove("active");
-            menuToggle.setAttribute("aria-expanded", "false");
-        }
-    });
-
-}
