@@ -132,6 +132,11 @@ if ("IntersectionObserver" in window && revealElements.length) {
 
     revealElements.forEach((el) => revealObserver.observe(el));
 
+    const projectReveals = document.querySelectorAll("#projects .reveal");
+    projectReveals.forEach((el, i) => {
+        el.style.transitionDelay = `${i * 0.1}s`;
+    });
+
 } else {
 
     revealElements.forEach((el) => el.classList.add("visible"));

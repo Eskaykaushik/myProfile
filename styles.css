@@ -24,6 +24,27 @@ html.light {
     --border: #e4e4e7;
 }
 
+html.light .grid {
+    background-image: linear-gradient(to right, rgba(228, 228, 231, 0.5) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(228, 228, 231, 0.5) 1px, transparent 1px);
+}
+
+html.light .cursor-glow {
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.06), transparent 65%);
+}
+
+html.light header {
+    background: rgba(248, 250, 252, 0.8);
+}
+
+html.light .chat-launcher {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+html.light .chat-panel {
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
+}
+
 /* ========================================== BASE ========================================== */
 html {
     scroll-behavior: smooth;
@@ -433,7 +454,7 @@ main {
 /* ========================================== MOBILE RESPONSIVENESS ========================================== */
 @media (max-width: 768px) {
     nav ul {
-        display: none; /* Simplifies layout for smaller viewports */
+        display: none;
     }
 
     #hero {
@@ -448,6 +469,17 @@ main {
     .project-arrow {
         padding-top: 0;
     }
+
+    .about-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-photo-wrap {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 
@@ -460,6 +492,36 @@ main {
 #about .description {
     max-width: 700px;
     margin-bottom: 1.5rem;
+}
+
+.about-row {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+}
+
+.about-photo-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+.about-photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    mask-image: radial-gradient(circle, black 40%, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle, black 40%, transparent 72%);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+}
+
+.about-text {
+    flex: 1;
 }
 
 
@@ -545,6 +607,48 @@ main {
     color: var(--muted);
     opacity: 0.45;
     text-transform: uppercase;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+.site-footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-copy {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-links a {
+    color: var(--muted);
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+}
+
+.footer-links svg {
+    width: 18px;
+    height: 18px;
 }
 
 /* ==========================================
