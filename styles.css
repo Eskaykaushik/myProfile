@@ -456,8 +456,8 @@ main {
     }
 
     .about-photo-wrap {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -482,22 +482,19 @@ main {
 
 .about-photo-wrap {
     position: relative;
-    width: 160px;
-    height: 160px;
+    width: 120px;
+    height: 120px;
     flex-shrink: 0;
-    isolation: isolate;
 }
 
 .about-photo-wrap::before {
     content: '';
     position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
+    inset: -3px;
     border-radius: 50%;
-    background: conic-gradient(from 0deg, #10b981, #22d3ee, #10b981);
-    animation: rotate-border 4s linear infinite;
+    background: var(--accent);
+    opacity: 0.35;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
 }
 
 .about-photo {
@@ -507,10 +504,6 @@ main {
     border-radius: 50%;
     object-fit: cover;
     display: block;
-}
-
-@keyframes rotate-border {
-    to { transform: rotate(360deg); }
 }
 
 .about-text {
