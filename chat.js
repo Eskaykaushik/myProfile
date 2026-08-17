@@ -28,6 +28,10 @@
 
     let firstOpen = true;
 
+    // Pre-warm Render service on page load (fire-and-forget)
+    fetch(API_URL.replace(/\/+$/, ""), { method: "GET" })
+        .catch(() => {});
+
 
     /* ==========================================
        Helpers
@@ -43,7 +47,11 @@
     }
 
     function scrollToBottom() {
-        body.scrollTop = body.scrollHeight;
+        const threshold = 80;
+        const nearBottom = body.scrollHeight - body.scrollTop - body.clientHeight < threshold;
+        if (nearBottom) {
+            body.scrollTop = body.scrollHeight;
+        }
     }
 
     function addMessage(author, text, type) {
@@ -155,10 +163,6 @@
         launcher.classList.add("active");
         launcher.setAttribute("aria-expanded", "true");
         input.focus();
-
-        // Pre-warm Render service (fire-and-forget)
-        fetch(API_URL.replace(/\/+$/, ""), { method: "GET" })
-            .catch(() => {});
 
         if (firstOpen) {
             firstOpen = false;
