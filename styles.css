@@ -487,16 +487,6 @@ main {
     flex-shrink: 0;
 }
 
-.about-photo-wrap::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.35;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-}
-
 .about-photo {
     position: relative;
     width: 100%;
@@ -504,6 +494,8 @@ main {
     border-radius: 50%;
     object-fit: cover;
     display: block;
+    mask-image: radial-gradient(circle, black 40%, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle, black 40%, transparent 72%);
 }
 
 .about-text {
