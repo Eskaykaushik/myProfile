@@ -149,6 +149,52 @@ html.light .theme-toggle .icon-moon {
     background: rgba(16, 185, 129, 0.06);
 }
 
+/* ========================================== MOBILE MENU TOGGLE ========================================== */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 38px;
+    height: 38px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 0.2s ease;
+}
+
+.hamburger-line {
+    display: block;
+    width: 18px;
+    height: 2px;
+    margin: 0 auto;
+    background: var(--muted);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.2s ease;
+}
+
+.menu-toggle:hover {
+    border-color: var(--accent);
+}
+
+.menu-toggle:hover .hamburger-line {
+    background: var(--accent);
+}
+
+.menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 /* ========================================== HERO ========================================== */
 #hero {
     max-width: 1100px;
@@ -432,8 +478,41 @@ main {
 
 /* ========================================== MOBILE RESPONSIVENESS ========================================== */
 @media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
     nav ul {
-        display: none; /* Simplifies layout for smaller viewports */
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0;
+        z-index: 49;
+    }
+
+    nav ul.nav-open {
+        display: flex;
+    }
+
+    nav ul li {
+        list-style: none;
+    }
+
+    nav ul a {
+        display: block;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    nav ul li:last-child a {
+        border-bottom: none;
     }
 
     #hero {
@@ -448,6 +527,17 @@ main {
     .project-arrow {
         padding-top: 0;
     }
+
+    .about-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-photo-wrap {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 
@@ -460,6 +550,50 @@ main {
 #about .description {
     max-width: 700px;
     margin-bottom: 1.5rem;
+}
+
+.about-row {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+}
+
+.about-photo-wrap {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+    isolation: isolate;
+}
+
+.about-photo-wrap::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #10b981, #22d3ee, #10b981);
+    animation: rotate-border 4s linear infinite;
+}
+
+.about-photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+@keyframes rotate-border {
+    to { transform: rotate(360deg); }
+}
+
+.about-text {
+    flex: 1;
 }
 
 
