@@ -272,6 +272,11 @@ html.light .theme-toggle .icon-moon {
     flex-shrink: 0;
 }
 
+#hero .socials a {
+    opacity: 0;
+    transform: translateY(12px);
+}
+
 .socials a:hover {
     color: var(--accent);
     background-color: rgba(16, 185, 129, 0.08);

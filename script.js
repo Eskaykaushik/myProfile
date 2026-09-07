@@ -142,3 +142,26 @@ if ("IntersectionObserver" in window && revealElements.length) {
     revealElements.forEach((el) => el.classList.add("visible"));
 
 }
+
+// ==========================================
+// HERO SOCIALS STAGGERED ENTRANCE
+// ==========================================
+
+const heroSocials = document.querySelectorAll('#hero .socials a');
+
+if (heroSocials.length) {
+    heroSocials.forEach((link, i) => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(12px)';
+        link.style.transition = 'opacity 0.5s ease ' + (0.8 + i * 0.1) + 's, transform 0.5s ease ' + (0.8 + i * 0.1) + 's';
+    });
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            heroSocials.forEach(link => {
+                link.style.opacity = '1';
+                link.style.transform = 'translateY(0)';
+            });
+        }, 100);
+    });
+}
